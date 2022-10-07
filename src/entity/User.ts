@@ -1,7 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { RefreshToken } from "./RefreshToken";
 
 @Entity()
 export class User {
+
     constructor(username?:string, email?:string, password?:string, age?:number){
         if(username)
             this.userName = username;
@@ -28,5 +30,6 @@ export class User {
     @Column()
     age: number;
 
-
+    @OneToMany(type=> RefreshToken, refreshToken => refreshToken.user)
+    refreshTokens: RefreshToken;    
 }

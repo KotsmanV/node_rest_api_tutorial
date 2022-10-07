@@ -14,11 +14,14 @@ class PasswordHash {
 
         const hashedPass = await new Promise<string>((resolve, reject) => {
             bcrypt.hash(plainPassword, salt, function (err, hash) {
-                if (err) reject(err)
-                resolve(hash)
+                err ? reject(err) : resolve(hash);
             });
         })
         return hashedPass;
+    }
+
+    public static async isPasswordValid(plainPassword:string, hashedPassword:string){
+        return await bcrypt.compare(plainPassword, hashedPassword);
     }
 }
 

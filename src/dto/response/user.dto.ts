@@ -1,9 +1,11 @@
 class UserDto{
-    constructor(id:number,username:string, email:string,age:number){
+    constructor(id:number,username:string, email:string,age?:number){
         this.id = id;
         this.username = username;
         this.email = email;
-        this.age = age;
+        if(age){
+            this.age = age;
+        }
     }
 
     id:number;
